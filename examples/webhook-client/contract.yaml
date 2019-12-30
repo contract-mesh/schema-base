@@ -1,0 +1,29 @@
+type: program/1.0.0
+info:
+    org: ellie-mae/architecture
+    name: samples/webhook-client
+features:
+    openapi:
+        - openapi: '3.0.1'
+          paths:
+            '/webhook-received':
+                post:
+                    x-contractmesh-openapi-callback:
+                        contract: ../webhooks
+                        operation: POST /v1/webhooks
+                        event: '*'
+                    requestBody:
+                        schema:
+                          type: object
+                          properties:
+                            when:
+                              type: string
+                              format: date-time
+                            payload:
+                              type: string
+                            type:
+                              type: string
+                    responses:
+                      '200':
+                        description: success
+        - $ref: openapi.yaml

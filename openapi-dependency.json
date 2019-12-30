@@ -1,0 +1,147 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "Schema for the openapi dependency in a contract.",
+    "type": "array",
+    "items": {
+        "oneOf": [
+            {
+                "type": "string",
+                "description": "Pointer to an REST endpoint on the dependency. This could either be '[METHOD] [path]' or '[operation-id]'."
+            },
+            {
+                "type": "object",
+                "description": "Pointer to an REST endpoint on the dependency *as well as* behavioral options on that dependency. The key could either be '[METHOD] [path]' or '[operation-id]'.",
+                "patternProperties": {
+                    ".*": {
+                        "type": "object",
+                        "description": "",
+                        "properties": {
+                            "resiliency": {
+                                "$ref": "#/definitions/resiliency"
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "definitions": {
+        "resiliency": {
+            "type": "object",
+            "description": "Describes resiliency policy on a synchronous dependency.",
+            "properties": {
+            }
+        },
+        "timeout": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "seconds"
+            ],
+            "properties": {
+                "seconds": {
+                    "type": "number"
+                },
+                "mode": {
+                    "type": "string",
+                    "enum": [
+                        "optimistic",
+                        "pessimistic"
+                    ],
+                    "default": "optimistic"
+                }
+            }
+        },
+        "bulkhead": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "maxConcurrent"
+            ],
+            "properties": {
+                "maxConcurrent": {
+                    "type": "integer"
+                },
+                "maxWaiting": {
+                    "type": "integer"
+                }
+            }
+        },
+        "cache": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "ttlSeconds"
+            ],
+            "properties": {
+                "ttlSeconds": {
+                    "type": "number"
+                }
+            }
+        },
+        "retry": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "times": {
+                    "type": "integer"
+                },
+                "waitSeconds": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "exponentialWait": {
+                    "type": "object",
+                    "properties": {
+                        "seconds": {
+                            "type": "number"
+                        },
+                        "power": {
+                            "type": "number"
+                        }
+                    },
+                    "oneOf": [
+                        {
+                            "required": [
+                                "times"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "times",
+                                "exponentialWait"
+                            ]
+                        },
+                        {
+                            "required": [
+                                "waitSeconds"
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "circuitBreaker": {
+            "type": "object",
+            "properties": {
+                "threshold": {
+                    "type": "integer"
+                },
+                "breakDurationSeconds": {
+                    "type": "number"
+                },
+                "samplingDurationSeconds": {
+                    "type": "number"
+                },
+                "minimumThroughput": {
+                    "type": "number"
+                }
+            }
+        },
+        "fallback": {
+            
+        }
+    }
+}

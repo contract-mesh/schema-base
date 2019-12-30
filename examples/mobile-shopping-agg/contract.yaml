@@ -1,0 +1,20 @@
+type: program/1.0.0
+info:
+    org: ellie-mae/architecture
+    name: samples/mobile-shopping-agg-service
+features:
+    openapi:
+        - $ref: ../standard/rest-endpoints.yaml
+        - $ref: openapi.yaml
+dependencies:
+    "../basket":
+        grpc:
+            - "Basket.GetBasketById"
+            - "Basket.UpdateBasket"
+    "../catalog":
+        grpc:
+            - "Catalog.GetItemById"
+            - "Catalog.GetItemsByIds"
+    "../ordering":
+        grpc:
+            - "Ordering.CreateOrderDraftFromBasketData"

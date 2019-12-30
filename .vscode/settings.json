@@ -1,0 +1,7 @@
+{
+    "yaml.schemas": {
+        "program.json": "/examples/**/contract.yaml",
+        "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/schemas/v3.0/schema.json": "/examples/**/openapi.yaml",
+        "solution.json": "/examples/contract.yaml"
+    }
+}

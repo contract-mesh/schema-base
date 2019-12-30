@@ -1,0 +1,16 @@
+type: program/1.0.0
+info:
+    org: ellie-mae/architecture
+    name: samples/webhooks-service
+features:
+    openapi:
+        - $ref: ../standard/rest-endpoints.yaml
+        - $ref: openapi.yaml
+dependencies:
+    ../ordering:
+        asyncapi:
+            - event/order/paid
+            - event/order/shipped
+    ../catalog:
+        asyncapi:
+            - event/catalog/priceChanged

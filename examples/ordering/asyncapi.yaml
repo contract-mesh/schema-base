@@ -1,0 +1,96 @@
+asyncapi: 2.0.0
+info:
+  title: Ordering Events
+  version: v1
+defaultContentType: application/json
+channels:
+  event/order/started:
+    description: An order has started.
+    subscribe:
+      message:
+        traits:
+          - $ref: '../standard/asyncapi-headers.yaml#/commonHeaders'
+        payload:
+          type: object
+          additionalProperties: false
+          properties:
+            userId:
+              type: string
+  event/order/cancelled:
+    description: An order has been cancelled.
+    subscribe:
+      message:
+        traits:
+          - $ref: '../standard/asyncapi-headers.yaml#/commonHeaders'
+        payload:
+          $ref: '#/components/schemas/orderEvent'
+  event/order/awaitingValidation:
+    description: An order's status has been changed to Awaiting Validation.
+    subscribe:
+      message:
+        traits:
+          - $ref: '../standard/asyncapi-headers.yaml#/commonHeaders'
+        payload:
+          $ref: '#/components/schemas/orderEventWithItems'
+  event/order/paid:
+    description: An order's status has been changed to Paid.
+    subscribe:
+      message:
+        traits:
+          - $ref: '../standard/asyncapi-headers.yaml#/commonHeaders'
+        payload:
+          $ref: '#/components/schemas/orderEventWithItems'
+  event/order/shipped:
+    description: An order has been shipped.
+    subscribe:
+      message:
+        traits:
+          - $ref: '../standard/asyncapi-headers.yaml#/commonHeaders'
+        payload:
+          $ref: '#/components/schemas/orderEvent'
+  event/order/submitted:
+    description: An order has been submitted.
+    subscribe:
+      message:
+        traits:
+          - $ref: '../standard/asyncapi-headers.yaml#/commonHeaders'
+        payload:
+          $ref: '#/components/schemas/orderEvent'
+  event/order/confirmed:
+    description: An order has been confirmed.
+    subscribe:
+      message:
+        traits:
+          - $ref: '../standard/asyncapi-headers.yaml#/commonHeaders'
+        payload:
+          $ref: '#/components/schemas/orderEvent'
+components:
+  schemas:
+    orderEvent:
+      type: object
+      additionalProperties: false
+      properties:
+        orderId:
+          type: int
+        orderStatus:
+          type: string
+        buyerName:
+          type: string
+    orderEventWithItems:
+      allOf:
+        - $ref: '#/components/schemas/orderEvent'
+        - type: object
+          additionalProperties: false
+          properties:
+            orderStockItems:
+              type: array
+              items:
+                '$ref': '#/components/schemas/orderStockItem'
+    orderStockItem:
+      type: object
+      additionalProperties: false
+      properties:
+        productId:
+          type: integer
+        units:
+          type: integer

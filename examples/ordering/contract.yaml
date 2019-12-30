@@ -1,0 +1,27 @@
+type: program/1.0.0
+info:
+    org: ellie-mae/architecture
+    name: samples/ordering-service
+features:
+    openapi:
+        - $ref: ../standard/rest-endpoints.yaml
+        - $ref: openapi.yaml
+    grpc:
+        - $ref: grpc.proto
+    asyncapi:
+        - $ref: asyncapi.yaml
+dependencies:
+    ../ordering-backgroundtasks:
+        asyncapi:
+            - event/order/gracePeriodConfirmed
+    ../payment:
+        asyncapi:
+            - event/payment/failed
+            - event/payment/succeeded
+    ../catalog:
+        asyncapi:
+            - event/catalog/order/stockRejected
+            - event/catalog/order/stockConfirmed
+    ../basket:
+        asyncapi:
+            - event/basket/checkout/accepted

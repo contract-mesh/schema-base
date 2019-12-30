@@ -1,0 +1,18 @@
+asyncapi: 2.0.0
+info:
+  title: Ordering Events
+  version: v1
+defaultContentType: application/json
+channels:
+  event/order/gracePeriodConfirmed:
+    description: An order has started.
+    subscribe:
+      message:
+        traits:
+          - $ref: '../standard/asyncapi-headers.yaml#/commonHeaders'
+        payload:
+          type: object
+          additionalProperties: false
+          properties:
+            orderId:
+              type: integer

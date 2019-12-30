@@ -1,0 +1,52 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "Contract mesh base type",
+    "required": [
+        "type",
+        "info"
+    ],
+    "properties": {
+        "type": {
+            "type": "string",
+            "description": "A property whose presence identifies this document as a contract, *and* specifies the type of contract and the version of its schema, in the format '[type]/[semver]'. This will be used by the Contract Mesh tooling to locate the schema.",
+            "pattern": "^[-\\w]+\\/(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(-(0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(\\.(0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*)?(\\+[0-9a-zA-Z-]+(\\.[0-9a-zA-Z-]+)*)?$"
+        },
+        "info": {
+            "$ref": "#/definitions/info"
+        }
+    },
+    "definitions": {
+        "info": {
+            "type": "object",
+            "required": [
+                "org",
+                "name"
+            ],
+            "properties": {
+                "org": {
+                    "type": "string",
+                    "description": "Specifies the organization that owns the contract. This may be a hierarchical string with slashes serving as delimiters.",
+                    "pattern": "^(\\w[-\\w]*\\w(?:\\/|$))+$"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Specifies the name of the contract. This may be a hierarchical string with slashes serving as delimiters.",
+                    "pattern": "^(\\w[-\\w]*\\w(?:\\/|$))+$"
+                },
+                "summary": {
+                    "type": "string",
+                    "description": "A one or two sentence description of what the contract is about. More detailed documentation should be provided by README.md that resides at the same level as contract.yaml"
+                },
+                "tags": {
+                    "type": "array",
+                    "description": "Search tags for this contract.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}

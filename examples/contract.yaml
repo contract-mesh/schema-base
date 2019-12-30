@@ -1,0 +1,20 @@
+type: solution/1.0.0
+info:
+    org: ellie-mae/architecture
+    name: samples/eshop
+contracts:
+    - basket
+    - catalog
+    - location
+    - marketing
+    - mobile-shopping-agg
+    - ordering
+    - ordering-background-tasks
+    - ordering-signalr-hub
+    - payment
+    - web-mvc
+    - web-shopping-agg
+    - web-spa
+    - web-status
+    - webhook-client
+    - webhooks

@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "Contract type for all types of executable applications or programs--code that is executable. It does not represent a library.",
+    "allOf": [
+        {
+            "$ref": "base.json"
+        },
+        {
+            "properties": {
+                "features": {
+                    "type": "object",
+                    "description": "A map of features supported by this app, the keys being the name of the feature, and values being the details of the feature.",
+                    "patternProperties": {
+                        ".*": {}
+                    }
+                },
+                "dependencies": {
+                    "type": "object",
+                    "description": "A map of other apps that this app depends on. Each key being the path/URI of the contract of another app.",
+                    "patternProperties": {
+                        ".*": {
+                            "type": "object",
+                            "description": "A map of features that this app depends on, on a particular app. Each key is the name of a feature on the dependency.",
+                            "patternProperties": {
+                                ".*": {
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

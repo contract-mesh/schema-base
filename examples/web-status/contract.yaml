@@ -1,0 +1,47 @@
+type: program/1.0.0
+info:
+    org: ellie-mae/architecture
+    name: samples/web-mvc
+features:
+    openapi:
+        - $ref: ../standard/rest-endpoints.yaml
+dependencies:
+    "../web-mvc":
+        openapi:
+            - "GET /health"
+    "../web-spa":
+        openapi:
+            - "GET /health"
+    "../web-shopping-agg":
+        openapi:
+            - "GET /health"
+    "../mobile-shopping-agg":
+        openapi:
+            - "GET /health"
+    "../ordering":
+        openapi:
+            - "GET /health"
+    "../basket":
+        openapi:
+            - "GET /health"
+    "../catalog":
+        openapi:
+            - "GET /health"
+    "../identity":
+        openapi:
+            - "GET /health"
+    "../marketing":
+        openapi:
+            - "GET /health"
+    "../locations":
+        openapi:
+            - "GET /health"
+    "../payments":
+        openapi:
+            - "GET /health"
+    "../ordering-signalr-hub":
+        openapi:
+            - "GET /health"
+    "../ordering-backgroundtasks":
+        openapi:
+            - "GET /health"

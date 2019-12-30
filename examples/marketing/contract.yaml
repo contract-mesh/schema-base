@@ -1,0 +1,12 @@
+type: program/1.0.0
+info:
+    org: ellie-mae/architecture
+    name: samples/marketing-service
+features:
+    openapi:
+        - $ref: ../standard/rest-endpoints.yaml
+        - $ref: openapi.yaml
+dependencies:
+    ../location:
+        asyncapi:
+            - event/location/changed

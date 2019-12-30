@@ -1,0 +1,58 @@
+asyncapi: 2.0.0
+info:
+  title: Catalog Events
+  version: v1
+defaultContentType: application/json
+channels:
+  event/catalog/product/priceChanged:
+    description: The price on a product has changed
+    subscribe:
+      message:
+        traits:
+          - $ref: '../standard/asyncapi-headers.yaml#/commonHeaders'
+        payload:
+          type: object
+          additionalProperties: false
+          properties:
+            productId:
+              type: integer
+            newPrice:
+              type: number
+            oldPrice:
+              type: number
+  event/catalog/order/stockConfirmed:
+    description: An order's stock request has been confirmed.
+    subscribe:
+      message:
+        traits:
+          - $ref: '../standard/asyncapi-headers.yaml#/commonHeaders'
+        payload:
+          type: object
+          additionalProperties: false
+          properties:
+            orderId:
+              type: integer
+  event/catalog/order/stockRejected:
+    description: An order's stock request has been rejected.
+    subscribe:
+      message:
+        traits:
+          - $ref: '../standard/asyncapi-headers.yaml#/commonHeaders'
+        payload:
+          type: object
+          additionalProperties: false
+          properties:
+            orderId:
+              type: integer
+            orderStockItems:
+              $ref: '#/components/schemas/confirmedOrderStockItem'
+components:
+  schemas:
+    confirmedOrderStockItem:
+      type: object
+      additionalProperties: false
+      properties:
+        productId:
+          type: integer
+        hasStock:
+          type: boolean

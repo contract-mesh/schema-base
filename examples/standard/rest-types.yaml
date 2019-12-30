@@ -1,0 +1,14 @@
+definitions:
+    error:
+        type: object
+        properties:
+            code:
+                type: string
+            summary:
+                type: string
+            details:
+                type: string
+            errors:
+                type: array
+                items:
+                    type: '#/definitions/error'

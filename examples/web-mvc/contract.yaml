@@ -1,0 +1,36 @@
+type: program/1.0.0
+info:
+    org: ellie-mae/architecture
+    name: samples/web-status
+features:
+    openapi:
+        - $ref: ../standard/rest-endpoints.yaml
+dependencies:
+    "../basket":
+        openapi:
+            - "GET /v1/basket/{id}"
+            - "POST /v1/basket"
+            - "POST /v1/basket/checkout"
+    "../web-shopping-agg":
+        openapi:
+            - "PUT /v1/basket/items"
+            - "GET /v1/order/draft/{basketId}"
+            - "POST /v1/basket/items"
+    "../marketing":
+        openapi:
+            - "GET /v1/campaigns"
+            - "GET /v1/campaigns/{id}"
+    "../catalog":
+        openapi:
+            - "GET /v1/catalog/items"
+            - "GET /v1/catalog/brands"
+            - "GET /v1/catalog/types"
+    "../location":
+        openapi:
+            - "POST /v1/locations"
+    "../ordering":
+        openapi:
+            - "GET /v1/orders/{orderId}"
+            - "GET /v1/orders"
+            - "PUT /v1/orders/cancel"
+            - "PUT /v1/orders/ship"

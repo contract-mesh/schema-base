@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "Contract type for a solution that aggregates multiple other contracts.",
+    "allOf": [
+        {
+            "$ref": "base.json"
+        },
+        {
+            "required": [
+                "contracts"
+            ],
+            "properties": {
+                "contracts": {
+                    "type": "array",
+                    "description": "An array of contracts.",
+                    "patternProperties": {
+                        ".*": {
+                            "type": "string",
+                            "format": "irireference"
+                        }
+                    },
+                    "minItems": 1
+                }
+            }
+        }
+    ]
+}

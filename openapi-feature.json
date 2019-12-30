@@ -1,0 +1,28 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "Schema for the openapi feature in a contract. It could refer to multiple OpenAPI specs.",
+    "type": "array",
+    "items": {
+        "oneOf": [
+            {
+                "type": "object",
+                "description": "An OpenAPI specification in another file.",
+                "required": [
+                    "$ref"
+                ],
+                "properties": {
+                    "$ref": {
+                        "type": "string",
+                        "format": "iri-reference",
+                        "description": "Location of the other file that contains the OpenAPI specification."
+                    }
+                },
+                "additionalProperties": false
+            },
+            {
+                "type": "object",
+                "description": "An inline OpenAPI specification."
+            }
+        ]
+    }
+}

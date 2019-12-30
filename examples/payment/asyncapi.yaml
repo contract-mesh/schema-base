@@ -1,0 +1,30 @@
+asyncapi: 2.0.0
+info:
+  title: Payment Events
+  version: v1
+defaultContentType: application/json
+channels:
+  event/payment/succeeded:
+    description: An order has started.
+    subscribe:
+      message:
+        traits:
+          - $ref: '../standard/asyncapi-headers.yaml#/commonHeaders'
+        payload:
+          type: object
+          additionalProperties: false
+          properties:
+            orderId:
+              type: integer
+  event/payment/failed:
+    description: An order has been cancelled.
+    subscribe:
+      message:
+        traits:
+          - $ref: '../standard/asyncapi-headers.yaml#/commonHeaders'
+        payload:
+          type: object
+          additionalProperties: false
+          properties:
+            orderId:
+              type: integer

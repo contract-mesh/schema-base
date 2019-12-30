@@ -1,0 +1,81 @@
+asyncapi: 2.0.0
+info:
+  title: Basket Events
+  version: v1
+defaultContentType: application/json
+channels:
+  event/basket/checkout/accepted:
+    description: A checkout has been accepted.
+    subscribe:
+      message:
+        traits:
+          - $ref: '../standard/asyncapi-headers.yaml#/commonHeaders'
+        payload:
+          type: object
+          additionalProperties: false
+          properties:
+            userId:
+              type: string
+            userName:
+              type: string
+            orderNumber:
+              type: integer
+            city:
+              type: string
+            street:
+              type: string
+            state:
+              type: string
+            country:
+              type: string
+            zipCode:
+              type: string
+            cardNumber:
+              type: string
+            cardHolderName:
+              type: string
+            cardExpiration:
+              type: string
+              format: date-time
+            cardSecurityNumber:
+              type: string
+            cardTypeId:
+              type: integer
+            buyer:
+              type: string
+            requestId:
+              type: string
+              format: guid
+            basket:
+              $ref: '#/components/schemas/customerBasket'
+components:
+  schemas:
+    customerBasket:
+      type: object
+      additionalProperties: false
+      properties:
+        buyerId:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/basketItem'
+    basketItem:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+        productId:
+          type: integer
+        productName:
+          type: string
+        unitPrice:
+          type: number
+        oldUnitPrice:
+          type: number
+        quantity:
+          type: integer
+        pictureUrl:
+          type: string
+          format: uri

@@ -1,0 +1,19 @@
+type: program/1.0.0
+info:
+    org: ellie-mae/architecture
+    name: samples/basket-service
+features:
+    openapi:
+        - $ref: ../standard/rest-endpoints.yaml
+        - $ref: openapi.yaml
+    grpc:
+        - $ref: grpc.proto
+    asyncapi:
+        - $ref: asyncapi.yaml
+dependencies:
+    ../ordering:
+        asyncapi:
+            - event/order/started
+    ../catalog:
+        asyncapi:
+            - event/catalog/product/priceChanged

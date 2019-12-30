@@ -1,0 +1,16 @@
+type: program/1.0.0
+info:
+    org: ellie-mae/architecture
+    name: samples/ordering-signalr-hub
+features:
+    openapi:
+        - $ref: ../standard/rest-endpoints.yaml
+dependencies:
+    ../ordering:
+        asyncapi:
+            - event/order/cancelled
+            - event/order/awaitingValidation
+            - event/order/paid
+            - event/order/shipped
+            - event/order/submitted
+            - event/order/confirmed

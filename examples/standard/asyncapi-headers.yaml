@@ -1,0 +1,7 @@
+commonHeaders:
+  headers:
+    type: object
+    properties:
+      correlation-id:
+        type: string
+        format: guid
